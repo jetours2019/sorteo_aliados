@@ -6,7 +6,6 @@ if (!$_SESSION['logged']) {
 }
 
 require_once "../../db/conexion.php";
-$user = $_SESSION['user'];
 $name = $_SESSION['fullname'];
 
 ?>
@@ -40,7 +39,31 @@ $name = $_SESSION['fullname'];
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ID</td>
+                            <td>1</td>
+                            <td>Fecha</td>
+                            <td>Cedula Participante</td>
+                            <td>Agencia Participante</td>
+                            <td>Reserva</td>
+                            <td>Cadena Hotelera</td>
+                            <td>Asesor Aliados</td>
+                            <td>Boleta</td>
+                            <td>icono ojo</td>
+                            <td><i></i></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Fecha</td>
+                            <td>Cedula Participante</td>
+                            <td>Agencia Participante</td>
+                            <td>Reserva</td>
+                            <td>Cadena Hotelera</td>
+                            <td>Asesor Aliados</td>
+                            <td>Boleta</td>
+                            <td>icono ojo</td>
+                            <td><i></i></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
                             <td>Fecha</td>
                             <td>Cedula Participante</td>
                             <td>Agencia Participante</td>
@@ -65,7 +88,30 @@ $name = $_SESSION['fullname'];
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function() {
-            $('#table_id').DataTable();
+            $('#table_id').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ registros por página",
+                    "zeroRecords": "No se encuentran registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "infoEmpty": "No se encuentran registros",
+                    "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                },
+                "order": [
+                    [0, "desc"]
+                ],
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": 1
+                }]
+            });
         });
     </script>
 

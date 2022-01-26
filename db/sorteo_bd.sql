@@ -118,36 +118,39 @@ VALUES ('Sandos Hotels & Resorts'),
 ('Palace Resorts'),
 ('Princess Hotels and Resorts');
 -- --------------------------------------------------------
-DROP TABLE IF EXISTS `participante`;
-CREATE TABLE `participante` (
+DROP TABLE IF EXISTS `participantes`;
+CREATE TABLE `participantes` (
     `cedula` varchar(30) NOT NULL,
     `fullname` varchar(70) NOT NULL,
     `email` varchar(70) NOT NULL,
     `telefono` varchar(70) NOT NULL,
     `agencia` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
--- Indices de la tabla `participante`
+-- Indices de la tabla `participantes`
 --
-ALTER TABLE `participante`
+ALTER TABLE `participantes`
 ADD PRIMARY KEY (`cedula`);
 
 -- --------------------------------------------------------
-DROP TABLE IF EXISTS `participacion`;
-CREATE TABLE `participacion` (
+DROP TABLE IF EXISTS `participaciones`;
+CREATE TABLE `participaciones` (
     `id` int(10) NOT NULL,
     `cedula` varchar(30) NOT NULL,
     `id_hotel` int(10) NOT NULL,
     `id_asesor` int(10) NOT NULL,
     `fecha` date NOT NULL,
-    `id_participante` int(10) NOT NULL,
     `reserva` varchar(100) NOT NULL,
-    `url_liquidacion` varchar(500) NOT NULL
+    `url_liquidacion` varchar(500) NOT NULL,
+    `estado` varchar(70) NOT NULL,
+    FOREIGN KEY (cedula) REFERENCES participantes(cedula),
+    FOREIGN KEY (id_hotel) REFERENCES hoteles(id),
+    FOREIGN KEY (id_asesor) REFERENCES asesores(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
--- Indices de la tabla `participacion`
+-- Indices de la tabla `participaciones`
 --
-ALTER TABLE `participacion`
+ALTER TABLE `participaciones`
 ADD PRIMARY KEY (`id`);
-ALTER TABLE `participacion`
+ALTER TABLE `participaciones`
 MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,
     AUTO_INCREMENT = 0;
 COMMIT;
