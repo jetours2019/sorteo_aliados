@@ -83,7 +83,11 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,
 COMMIT;
 INSERT INTO `asesores` (`fullname`)
 VALUES ('Diana Gasca'),
-    ('Jackeline U.'),
+    ('Jhon Fredy Rincon'),
+    ('Fabio Muñoz'),
+    ('Jackeline Urrego'),
+    ('Angie Vasquez'),
+    ('Carlos Rodriguez'),
     ('John Quintero'),
     ('Omar Barrera'),
     ('Marian Galvis'),
@@ -113,10 +117,10 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,
     AUTO_INCREMENT = 0;
 COMMIT;
 
-INSERT INTO `hoteles` (`fullname`)
-VALUES ('Sandos Hotels & Resorts'),
-('Palace Resorts'),
-('Princess Hotels and Resorts');
+INSERT INTO `hoteles` (`fullname`, `destacado`)
+VALUES ('Sandos Hotels & Resorts', 0),
+('Palace Resorts', 0),
+('Princess Hotels and Resorts', 1);
 -- --------------------------------------------------------
 DROP TABLE IF EXISTS `participantes`;
 CREATE TABLE `participantes` (
@@ -140,6 +144,7 @@ CREATE TABLE `participaciones` (
     `id_asesor` int(10) NOT NULL,
     `fecha` date NOT NULL,
     `reserva` varchar(100) NOT NULL,
+    `boleta` int(10) NOT NULL,
     `url_liquidacion` varchar(500) NOT NULL,
     `estado` varchar(70) NOT NULL,
     FOREIGN KEY (cedula) REFERENCES participantes(cedula),
