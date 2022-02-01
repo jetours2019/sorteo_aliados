@@ -377,7 +377,7 @@ require_once "admin/partials/info_asesores.php";
                     <div class="consulta-cedula">
                         <div class="mb-3">
                             <label for="consCedula" class="form-label">Número de Cedula</label>
-                            <input type="text" class="form-control" id="consCedula">
+                            <input type="text" class="form-control numeric" id="consCedula">
                         </div>
 
                         <button class="btn btn-primary" id="consultar">Consultar</button>
