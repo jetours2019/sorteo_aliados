@@ -165,7 +165,7 @@ while ($registro = mysqli_fetch_array($consulta)) {
                             location.reload();
                         })
                         new_status = 'Habilitado';
-                    }else{
+                    } else {
                         funcMessage = Swal.fire(
                             'Inhabilitada!',
                             'La participación con ID # ' + id + ' ha sido inhabilitada.',
@@ -176,23 +176,23 @@ while ($registro = mysqli_fetch_array($consulta)) {
                         new_status = 'Inhabilitado';
                     }
                     $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: {
-                        id: id,
-                        new_status: new_status
-                    },
-                    success: function(data) {
-                        funcMessage()
-                    },
-                    error: function(data) {
-                        Swal.fire(
-                            'Error!',
-                            'Error de conexión con el servidor',
-                            'error'
-                        )
-                    }
-                });
+                        type: 'POST',
+                        url: url,
+                        data: {
+                            id: id,
+                            new_status: new_status
+                        },
+                        success: function(data) {
+                            funcMessage()
+                        },
+                        error: function(data) {
+                            Swal.fire(
+                                'Error!',
+                                'Error de conexión con el servidor',
+                                'error'
+                            )
+                        }
+                    });
 
                 })
             });

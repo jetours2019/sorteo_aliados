@@ -14,7 +14,52 @@ $(document).ready(function () {
   $(".numeric").on("input", function (event) {
     this.value = this.value.replace(/[^0-9]/g, "");
   });
+
+  $("#cedula").focusout(buscarParticipante);
 });
+
+function buscarParticipante() {
+  var cedula = $("#cedula").val();
+  if (cedula == "") {
+    return;
+  }
+
+  $.ajax({
+    url: "../controllers/consultarParticipante.php",
+    type: "POST",
+    data: {
+      cedula: cedula,
+    },
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      if (data.success) {
+        Swal.fire({
+            title: "¿Es usted " + data.participante.fullname + "?",
+            text: '¿Desea autocompletar su información?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $("#fullname").val(data.participante.fullname);
+                $("#celular").val(data.participante.telefono);
+                $("#correo").val(data.participante.email);
+                $("#agencia").val(data.participante.agencia);
+                $("#reserva").focus();
+            } 
+        })      
+      }
+    },
+    error: function (data) {
+      console.log(data);
+      Swal.fire("Error!", "Error de conexión con el servidor", "error");
+    },
+  });
+}
 
 function buscarCedula() {
   var cedula = $("#consCedula").val();
@@ -66,7 +111,7 @@ function sendForm() {
   var formData = new FormData();
   formData.append("data", JSON.stringify(data));
   formData.append("file", $("#liquidacion")[0].files[0]);
-  
+
   $.ajax({
     url: "../controllers/generarParticipacion.php",
     type: "POST",
@@ -78,11 +123,9 @@ function sendForm() {
     success: function (data) {
       console.log(data);
       if (data.success) {
-        Swal.fire("Exito!", data.message, "success").then(
-            function () {
-                window.location.reload();
-            }
-        )
+        Swal.fire("Exito!", data.message, "success").then(function () {
+          window.location.reload();
+        });
       } else {
         Swal.fire("Error!", data.error, "error");
       }
